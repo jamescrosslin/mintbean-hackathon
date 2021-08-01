@@ -1,0 +1,6 @@
+
+front end sends basic auth with username and password ->
+server authenticates and sends signed jwt back ->
+save jwt to localStorage ->
+send payload from client with each future request to server ->
+someone steals payload from insecure localStorage and uses it

@@ -3,6 +3,7 @@ const { authenticateUser, asyncHandler, checkOwnership } = require('../middlewar
 const express = require('express');
 const router = express.Router();
 
+const { startGame } = require('../controller/games');
 const { clientSubscribe, sendClientUpdates } = require('../controller/subscribe');
 
 router.param('gameId', async (req, res, next, id) => {
@@ -45,7 +46,7 @@ router.post(
     });
     await game.addUser(req.currentUser);
 
-    const gamePlusUsers = await Game.findOne({
+    await Game.findOne({
       where: { id: game.id },
       include: [{ model: User }],
     });
@@ -59,7 +60,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const {
       currentUser,
-      game: { maxPlayers, Users },
+      game: { id, maxPlayers, Users },
     } = req;
 
     const spaceAvailable = maxPlayers >= Users.length + 1;
@@ -70,12 +71,16 @@ router.get(
       throw err;
     }
 
-    await req.game.addUser(currentUser);
+    const didAddUser = await req.game.addUser(currentUser);
+    console.log('added user: ');
+    if (didAddUser && maxPlayers === Users.length + 1) await startGame(id);
 
     next();
   }),
   sendClientUpdates,
   (req, res) => res.json({ message: 'Joined the game' }),
 );
+const warRoutes = require('./war');
+router.use('/war', warRoutes);
 
 module.exports = router;

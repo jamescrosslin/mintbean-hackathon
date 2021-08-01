@@ -57,12 +57,11 @@ function App() {
             <PrivateRoute path="/games/join/:id">
               <Join />
             </PrivateRoute>
-            <PrivateRoute path="/games/play/:id">
+            <PrivateRoute path="/games/:id">
               <Play />
             </PrivateRoute>
             <PrivateRoute path="/games/create"></PrivateRoute>
             <PrivateRoute path="/games/:id/update" exact></PrivateRoute>
-            <Route path="/games/:id"></Route>
             {/* UserSignIn component only renders if there is no user information available */}
             <Route path="/signin">{user?.username ? <Redirect to="/" /> : <UserSignIn />}</Route>
             <Route path="/signup">

@@ -3,6 +3,7 @@ const clients = {};
 module.exports = {
   clientSubscribe: async (req, res) => {
     const { id: gameId } = req.game;
+    console.log(req.game);
     res.status(200).set({
       'Content-Type': 'text/event-stream',
       'Connection': 'keep-alive',
@@ -29,8 +30,9 @@ module.exports = {
   },
   sendClientUpdates: async ({ game }, res, next) => {
     const { id: gameId } = game;
+    const subscribers = clients[gameId] || [];
 
-    clients[gameId].forEach((client) => {
+    subscribers.forEach((client) => {
       client.res.write(`data: ${JSON.stringify(game)}\n\n`);
     });
     next();

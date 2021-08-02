@@ -47,29 +47,29 @@ function CreateGame({ refreshGames, dismissForm }) {
         <span>Invite link: {data.message}</span>
       </>
     )) || (
-      <div className="wrap">
+      <div className="modal--wrapper">
         {/* displays validation errors when they exist */}
         {error?.errors && <ValidationErrors error={error} />}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="modal">
           {
             //put popup overlay here
           }
-          <label htmlFor="typeOfGame">Type of Game: </label>
-          <select id="typeOfGame" name="typeOfGame" onChange={handleFormChange}>
+          <label htmlFor="typeOfGame" className="modal--label">Type of Game: <select id="typeOfGame" name="typeOfGame" onChange={handleFormChange} className="modal--select">
             <option value="">Select a Game</option>
             <option value="War">War</option>
             <option value="WarPlus">WarPlus</option>
-          </select>
-          <label htmlFor="maxPlayers">Number of Players: </label>
-          <select id="maxPlayers" name="maxPlayers" onChange={handleFormChange}>
+          </select></label>
+          
+          <label htmlFor="maxPlayers" className="modal--label">Number of Players:   <select id="maxPlayers" name="maxPlayers" onChange={handleFormChange} className="modal--select">
             <option value="">-</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-          </select>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={dismissForm}>
+          </select></label>
+        
+          <button type="submit" className="modal--submit--btn">Submit</button>
+          <button type="button" onClick={dismissForm} className="modal--cancel--btn">
             Cancel
           </button>
         </form>

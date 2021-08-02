@@ -6,8 +6,9 @@ html {
   font-size: 1.25em;
 }
 body {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
+
 h2 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -20,8 +21,9 @@ p {
   hyphens: auto;
 }
 a {
-  color: #939;
+  color: rgb(29, 69, 179);
   text-decoration: none;
+  text-shadow: 1px 1px 1px forestgreen;
 }
 .wrap {
   max-width: 1250px;
@@ -29,7 +31,7 @@ a {
   padding: 0 1rem;
 }
 header {
-  background: #57496e;
+  background: -webkit-linear-gradient(rgb(51, 215, 154) 24%, rgb(75, 118, 235));
   color: #fff;
   padding: 1rem 0;
   margin-bottom: 2rem;
@@ -47,7 +49,7 @@ header li {
   font-size: 0.8rem;
 }
 header nav a {
-  color: #dbd;
+  color: rgb(189, 223, 243);
 }
 header nav a:hover {
   color: #fff;
@@ -62,11 +64,12 @@ header nav a:hover {
   margin-left: 0.5rem;
 }
 .course--module {
-  background: #7c689b;
+  background: rgb(42, 181, 131);
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   display: block;
+  box-shadow: 0 0 5px 2px rgb(32, 97, 87) inset;
 }
 .course--label {
   color: #fff;
@@ -80,16 +83,19 @@ header nav a:hover {
   font-size: 1.25rem;
 }
 .course--add--module {
-  background: #ddd9e4;
-  color: #57496e;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bolder;
+  background: rgb(175, 241, 217);
+  color: rgb(29, 95, 71);
   font-weight: 300;
   font-size: 1.25rem;
+  box-shadow: 0 0 5px 2px rgb(102, 192, 178) inset;
 }
 .course--add--title .add {
   width: 20px;
   height: auto;
   margin-right: 5px;
-  fill: #57496e;
+  fill: rgb(29, 95, 71);
 }
 .course--detail--title {
   padding-bottom: 0.25rem;
@@ -104,7 +110,7 @@ header nav a:hover {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
-  color: #47395e;
+  color: rgb(29, 95, 71);
 }
 .course--detail--list {
   font-weight: 300;
@@ -168,11 +174,11 @@ textarea {
   min-height: 300px;
 }
 .button {
-  background: #7c689b;
-  color: #fff;
+  background: rgb(133, 235, 197);
+  color: rgb(29, 95, 71);
   font-size: 1rem;
   padding: 0.75rem 1.5rem;
-  border: 0;
+  border: 2px solid rgb(29, 95, 71);
   margin: 0 0 0.5rem 0;
   display: block;
   width: 210px;
@@ -181,23 +187,29 @@ textarea {
   font-weight: bold;
   transition: background 0.2s;
   font: inherit;
+  box-shadow: 0 0 0 1px rgb(48, 99, 80) inset;
+
 }
 .button:last-child {
   margin-bottom: 0;
 }
-.button:not(.button-secondary):hover {
-  background: #63537d;
+.button:hover {
+  background: rgb(48, 99, 80);
+  box-shadow: 0 0 0 2px rgb(133, 235, 197) inset;
+
+  color: ghostwhite;
   cursor: pointer;
 }
 .button-secondary {
-  color: #7c689b;
+  color: rgb(75, 118, 235);
   background: none;
-  box-shadow: 0 0 0 2px #7c689b inset;
+  box-shadow: 0 0 0 2px rgb(75, 118, 235) inset;
   transition: box-shadow 0.2s, color 0.2s;
 }
 .button-secondary:hover {
-  color: #63537d;
-  box-shadow: 0 0 0 2px #63537d inset;
+  color: ghostwhite;
+  background-color: rgb(31, 61, 146);
+  box-shadow: 0 0 0 2px rgb(75, 118, 235) inset;
   cursor: pointer;
 }
 input:focus,
@@ -206,7 +218,7 @@ button:focus,
 textarea:focus {
   border: none;
   border-radius: 0;
-  outline: 2px solid #332a40;
+  outline: 2px solid rgb(51, 215, 154);
 }
 
 @media screen and (min-width: 600px) {
@@ -243,4 +255,83 @@ textarea:focus {
     margin: 0 0.5rem 0 0;
     display: inline-block;
   }
+}
+ /* New Game Modal Styles */
+
+ .modal {
+   position: relative;
+   top: 20vh;
+   z-index: 1;
+   width: 40%;
+   margin: 2rem auto;
+   padding: 1.5rem;
+   text-align: center;
+   background: linear-gradient( 75deg,hsl(184, 70%, 81%), hsl(200, 50%, 82%) 80%);
+   border: 3px solid  rgb(30, 168, 143);
+   border-radius: 8px;
+   box-shadow: 1px 2px 5px rgba(179, 177, 177, 0.7), 3px 4px 15px rgba(0, 0, 0, .7),  0 0 10px 5px rgba(16, 196, 196, .7) inset;
+   
+ }
+
+ .modal--label {
+   margin-top: 1.3rem;
+   padding-bottom: .3rem;
+   font-size: 1.2rem;
+   font-weight: 500;
+   color:rgb(62, 105, 223);
+   text-shadow: 2px 2px 4px rgba(53, 153, 153, 0.88);
+ }
+
+ .modal--select {
+  border-radius: 5px;
+  padding: .5rem;
+  box-shadow: 2px 1px 1px rgba(123, 123, 126, .8);
+ }
+
+ .modal--cancel--btn, .modal--submit--btn {
+  font-family: 'Raleway', sans-serif;
+  font-size: .8rem;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: .5rem;
+  margin-left: 1rem;
+  text-shadow: 1px 1px 1px rgba(106, 108, 109, 0.605);
+  box-shadow: 2px 1px 1px rgba(123, 123, 126, .8);
+ }
+
+
+ .modal--submit--btn {
+   color:rgb(17, 94, 58);
+   background-color: rgb(146, 221, 196);
+   border: 2px solid rgb(17, 94, 58);
+   
+ }
+
+ .modal--cancel--btn {
+   color: rgb(75, 118, 235);
+   border: 2px solid rgb(75, 118, 235);
+   background: none;
+ }
+
+ .modal--submit--btn:hover {
+   background-color: rgb(81, 201, 145);
+   color: ghostwhite;
+   box-shadow: 0 0 0 2px rgb(133, 235, 197) inset;
+
+ }
+
+ .modal--cancel--btn:hover {
+  background-color:  rgb(136, 164, 243);
+  color: ghostwhite;
+  box-shadow: 0 0 0 2px rgb(111, 145, 238) inset;
+
+}
+
+.modal--wrapper {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 3.2rem;
+  left: 0;
+  background-color: rgba(0,0,0,.5);
 }

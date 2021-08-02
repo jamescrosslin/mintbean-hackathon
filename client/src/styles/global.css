@@ -69,6 +69,7 @@ header nav a:hover {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   display: block;
+  box-shadow: 0 0 5px 2px rgb(32, 97, 87) inset;
 }
 .course--label {
   color: #fff;
@@ -88,6 +89,7 @@ header nav a:hover {
   color: rgb(29, 95, 71);
   font-weight: 300;
   font-size: 1.25rem;
+  box-shadow: 0 0 5px 2px rgb(102, 192, 178) inset;
 }
 .course--add--title .add {
   width: 20px;
@@ -264,10 +266,11 @@ textarea:focus {
    margin: 2rem auto;
    padding: 1.5rem;
    text-align: center;
-   background-color: rgb(204, 252, 248);
+   background: linear-gradient( 75deg,hsl(184, 70%, 81%), hsl(200, 50%, 82%) 80%);
    border: 3px solid  rgb(30, 168, 143);
    border-radius: 8px;
-   box-shadow: 1px 2px 5px rgba(179, 177, 177, 0.7), 3px 4px 15px rgba(0, 0, 0, .7) ;
+   box-shadow: 1px 2px 5px rgba(179, 177, 177, 0.7), 3px 4px 15px rgba(0, 0, 0, .7),  0 0 10px 5px rgba(16, 196, 196, .7) inset;
+   
  }
 
  .modal--label {
@@ -275,8 +278,8 @@ textarea:focus {
    padding-bottom: .3rem;
    font-size: 1.2rem;
    font-weight: 500;
-   color:rgb(75, 118, 235);
-   text-shadow: 1px 1px 1px rgba(0,0,0,.7);
+   color:rgb(62, 105, 223);
+   text-shadow: 2px 2px 4px rgba(53, 153, 153, 0.88);
  }
 
  .modal--select {
@@ -311,16 +314,16 @@ textarea:focus {
  }
 
  .modal--submit--btn:hover {
-   background-color: rgb(17, 94, 58);
+   background-color: rgb(81, 201, 145);
    color: ghostwhite;
    box-shadow: 0 0 0 2px rgb(133, 235, 197) inset;
 
  }
 
  .modal--cancel--btn:hover {
-  background-color:  rgb(31, 61, 146);
+  background-color:  rgb(136, 164, 243);
   color: ghostwhite;
-  box-shadow: 0 0 0 2px rgb(75, 118, 235) inset;
+  box-shadow: 0 0 0 2px rgb(111, 145, 238) inset;
 
 }
 

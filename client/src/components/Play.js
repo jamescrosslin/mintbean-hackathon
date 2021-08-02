@@ -17,7 +17,7 @@ function Play() {
 
     events.onmessage = (event) => {
       const parsedData = JSON.parse(event.data);
-      console.log(parsedData.Users);
+      console.log(parsedData);
       setGame(parsedData);
     };
     events.onerror = (event) => {
@@ -36,19 +36,22 @@ function Play() {
     (!isLoading && game && (
       <div className="play-area">
         {game.status !== 'created' &&
-          game.Users.map((player) => (
+          game.gameplay.map((player) => (
             <figure key={player.id}>
-              <img
-                // src={`../img/${game.deck[player.id]}`}
-                alt={`Card belonging to ${player.firstName}: ${game.deck[player.id]}`}
-              />
+              {player.event && <h3>{player.event}!</h3>}
+              {player.showCards.map((card, i) => (
+                <img
+                  // src={`../img/${game.gameplay[player.id]}`}
+                  alt={`Card belonging to ${player.name}: ${card}`}
+                />
+              ))}
               <figcaption>
-                {`${player.firstName}: ${game.deck[player.id]}`}
-                <span className={game.deck[player.id].status}>{game.deck[player.id].status}</span>
+                {`${player.name}: ${player.showCards.join(', ')}`}
+                <span className={player.ready}>{player.status}</span>
               </figcaption>
-              {player.id === user.id && player.status === 'waiting' && (
+              {player.id === user.id && (
                 <>
-                  <button>Ready</button>
+                  <button disabled={player.ready}>{player.ready ? 'Waiting...' : 'Ready'}</button>
                 </>
               )}
             </figure>

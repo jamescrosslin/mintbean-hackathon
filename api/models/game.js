@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ['War', 'WarPlus'],
     },
-    state: {
+    status: {
       type: DataTypes.ENUM,
       values: ['created', 'completed', 'ongoing'],
       defaultValue: 'created',
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     //automatically gets gameId for SSE subscription
-    deck: {
+    gameplay: {
       type: DataTypes.JSON, //array of card values
       //get suit card.slice(-1), get value card.slice(0, -1)
       defaultValue: {

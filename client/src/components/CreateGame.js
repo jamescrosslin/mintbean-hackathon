@@ -54,21 +54,39 @@ function CreateGame({ refreshGames, dismissForm }) {
           {
             //put popup overlay here
           }
-          <label htmlFor="typeOfGame" className="modal--label">Type of Game: <select id="typeOfGame" name="typeOfGame" onChange={handleFormChange} className="modal--select">
-            <option value="">Select a Game</option>
-            <option value="War">War</option>
-            <option value="WarPlus">WarPlus</option>
-          </select></label>
-          
-          <label htmlFor="maxPlayers" className="modal--label">Number of Players:   <select id="maxPlayers" name="maxPlayers" onChange={handleFormChange} className="modal--select">
-            <option value="">-</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select></label>
-        
-          <button type="submit" className="modal--submit--btn">Submit</button>
+          <label htmlFor="typeOfGame" className="modal--label">
+            Type of Game:
+            <select
+              id="typeOfGame"
+              name="typeOfGame"
+              onChange={handleFormChange}
+              className="modal--select"
+            >
+              <option value="">Select a Game</option>
+              <option value="War">War</option>
+              <option value="WarPlus">WarPlus</option>
+            </select>
+          </label>
+
+          <label htmlFor="maxPlayers" className="modal--label">
+            Number of Players:
+            <select
+              id="maxPlayers"
+              name="maxPlayers"
+              onChange={handleFormChange}
+              className="modal--select"
+            >
+              <option value="">-</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+
+          <button type="submit" className="modal--submit--btn">
+            Submit
+          </button>
           <button type="button" onClick={dismissForm} className="modal--cancel--btn">
             Cancel
           </button>

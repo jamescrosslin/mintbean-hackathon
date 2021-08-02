@@ -7,15 +7,17 @@ import { useFetchData } from '../hooks';
 function Play() {
   const [game, setGame] = useState(null);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const { user } = useUserContext();
 
   useEffect(() => {
+    setIsLoading(true);
     let events = new EventSource(`${url}/api/games/play/${id}`);
 
     events.onmessage = (event) => {
       const parsedData = JSON.parse(event.data);
+      console.log(parsedData);
       setGame(parsedData);
     };
     events.onerror = (event) => {
@@ -25,27 +27,35 @@ function Play() {
     return () => events.close();
   }, [id]);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [game]);
+
   return (
     (error && <Redirect to={errorRoutes[error.response.status] || '/error'} />) ||
-    (!isLoading && (
+    (!isLoading && game && (
       <div className="play-area">
-        {game.Users.map((player) => (
-          <figure key={player.id}>
-            <img
-              src={`../img/${game.deck[player.id]}`}
-              alt={`Card belonging to ${player.firstName}: ${game.deck[player.id]}`}
-            />
-            <figcaption>
-              {`${player.firstName}: ${game.deck[player.id]}`}
-              <span className={game.deck[player.id].status}>{game.deck[player.id].status}</span>
-            </figcaption>
-            {player.id === user.id && player.status === 'waiting' && (
-              <>
-                <button>Ready</button>
-              </>
-            )}
-          </figure>
-        ))}
+        {game.status !== 'created' &&
+          game.gameplay.map((player) => (
+            <figure key={player.id}>
+              {player.event && <h3>{player.event}!</h3>}
+              {player.showCards.map((card, i) => (
+                <img
+                  // src={`../img/${game.gameplay[player.id]}`}
+                  alt={`Card belonging to ${player.name}: ${card}`}
+                />
+              ))}
+              <figcaption>
+                {`${player.name}: ${player.showCards.join(', ')}`}
+                <span className={player.ready}>{player.status}</span>
+              </figcaption>
+              {player.id === user.id && (
+                <>
+                  <button disabled={player.ready}>{player.ready ? 'Waiting...' : 'Ready'}</button>
+                </>
+              )}
+            </figure>
+          ))}
       </div>
     ))
   );

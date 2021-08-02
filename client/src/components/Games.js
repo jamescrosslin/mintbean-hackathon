@@ -38,6 +38,7 @@ function Games() {
   return (
     (error && <Redirect to={errorRoutes[error.response.status] || '/error'} />) || (
       <>
+
       <div className="wrap main--grid">
         {!isLoading && games}
         <button
@@ -61,12 +62,15 @@ function Games() {
        
       </div> 
       {creating && (
+
           <CreateGame
             refreshGames={refreshGames}
             dismissForm={() => setCreating((prevState) => !prevState)}
           />
         )}
-        </>
+
+      </>
+
     )
   );
 }

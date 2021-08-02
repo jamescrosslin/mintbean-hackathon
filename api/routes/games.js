@@ -3,6 +3,7 @@ const { authenticateUser, asyncHandler, checkOwnership } = require('../middlewar
 const express = require('express');
 const router = express.Router();
 
+const { startGame } = require('../controller/play');
 const { clientSubscribe, sendClientUpdates } = require('../controller/subscribe');
 
 router.param('gameId', async (req, res, next, id) => {
@@ -30,7 +31,7 @@ router.use(authenticateUser); // authenticates users for every following route i
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const games = await req.currentUser.getGames();
+    const games = await req.currentUser.getGames({ include: [{ model: User }] });
     res.json({ games });
   }),
 );
@@ -43,23 +44,19 @@ router.post(
       maxPlayers,
       typeOfGame,
     });
-    await game.addUser(req.currentUser);
 
-    const gamePlusUsers = await Game.findOne({
-      where: { id: game.id },
-      include: [{ model: User }],
-    });
+    req.game = game;
 
-    res.status(201).json({ message: `http://localhost:3000/join/${game.id}` });
+    res.redirect(`/api/games/join/${game.id}`);
   }),
 );
 
-router.get(
+router.use(
   '/join/:gameId',
   asyncHandler(async (req, res, next) => {
     const {
       currentUser,
-      game: { maxPlayers, Users },
+      game: { id, maxPlayers, Users },
     } = req;
 
     const spaceAvailable = maxPlayers >= Users.length + 1;
@@ -70,12 +67,16 @@ router.get(
       throw err;
     }
 
-    await req.game.addUser(currentUser);
+    const didAddUser = await req.game.addUser(currentUser);
+    console.log('added user: ');
+    if (didAddUser && maxPlayers === Users.length + 1) await startGame(id);
 
     next();
   }),
   sendClientUpdates,
-  (req, res) => res.json({ message: 'Joined the game' }),
+  (req, res) => res.json({ gameId: req.game.id }),
 );
+const warRoutes = require('./war');
+router.use('/war', warRoutes);
 
 module.exports = router;

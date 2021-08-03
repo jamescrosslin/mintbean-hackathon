@@ -63,6 +63,7 @@ const turnAction = {
           player.hiddenCards = [];
         });
       }
+
       playersWithCardsLeft.forEach((player) => {
         player.event = null;
         if (player.id !== 'computer') player.ready = false;
@@ -73,7 +74,7 @@ const turnAction = {
       playersWithCardsLeft = gameplay.filter((player) => {
         const numberToBeat = areUnique ? 1 : 4;
         if (player.deck.length < numberToBeat) player.event = 'Out of Cards';
-        return player.deck.length > 0;
+        return player.deck.length >= numberToBeat;
       });
       if (!areUnique && playersWithCardsLeft.length > 1) {
         cardValues.forEach((val, i, arr) => {
@@ -85,7 +86,7 @@ const turnAction = {
             }
           }
         });
-      } else {
+      } else if (playersWithCardsLeft.length > 1) {
         const winnerIndex = cardValues.indexOf(Math.max(...cardValues));
         playersWithCardsLeft[winnerIndex].event = 'Winner';
       }

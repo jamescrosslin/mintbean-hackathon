@@ -1,32 +1,33 @@
-import React from 'react';
-import { useUserContext } from '../context/UserContext';
-import { useFetchData } from '../hooks';
+import React from "react"
+import { useUserContext } from "../context/UserContext"
+import { useFetchData } from "../hooks"
+import images from "../img"
 
 function War({ game }) {
-  const { user } = useUserContext();
+  const { user } = useUserContext()
   const { data, fetchData } = useFetchData({
     isLoading: true,
     data: null,
-    error: null,
-  });
+    error: null
+  })
 
   function handleReady() {
     fetchData({
       apiRoute: `/api/games/war/${game.id}/play`,
-      method: 'GET',
-      isAuthRequired: true,
-    });
+      method: "GET",
+      isAuthRequired: true
+    })
   }
   return (
     <>
-      {game.status !== 'created' &&
+      {game.status !== "created" &&
         game.gameplay.map((player) => (
           <figure key={player.id}>
             {player.event && <h3>{player.event}!</h3>}
             {player.showCards.map((card, i) => (
               <img
                 key={i}
-                // src={`../img/${game.gameplay[player.id]}`}
+                src={img[card]}
                 alt={`Card belonging to ${player.name}: ${card}`}
               />
             ))}
@@ -36,15 +37,19 @@ function War({ game }) {
             </figcaption>
             {player.id === user.id && (
               <>
-                <button onClick={handleReady} disabled={player.ready}>
-                  {player.ready ? 'Waiting...' : 'Ready'}
+                <button
+                  onClick={handleReady}
+                  disabled={player.ready}
+                  className="ready--button"
+                >
+                  {player.ready ? "Waiting..." : "Ready"}
                 </button>
               </>
             )}
           </figure>
         ))}
     </>
-  );
+  )
 }
 
-export default War;
+export default War

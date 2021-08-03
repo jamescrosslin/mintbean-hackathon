@@ -20,7 +20,11 @@ function War({ game }) {
   }
   return (
     <>
+      {game.gameplay.some((player) => player.event === 'War') && (
+        <h3>Each player puts 4 cards in the pot</h3>
+      )}
       {game.status !== 'created' &&
+        game.status !== 'completed' &&
         game.gameplay.map((player) => (
           <figure className="player--cards" key={player.id}>
             {player.event && <h3 className="player--event">{player.event}!</h3>}

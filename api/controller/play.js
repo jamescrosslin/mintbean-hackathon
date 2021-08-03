@@ -9,7 +9,7 @@ function shuffle(arr) {
   return newArr;
 }
 
-const computer = { id: 'computer', firstName: 'computer' };
+const computer = { id: 'computer', firstName: 'computer', ready: true };
 
 const configureGame = {
   'War': function (deck, players) {
@@ -31,11 +31,58 @@ const configureGame = {
         ready: false,
       };
     });
-    console.log(gameplay);
     return gameplay;
   },
   'WarPlus': function (deck, players) {
     return this.War(deck, players);
+  },
+};
+
+const turnAction = {
+  'War': function (game, user) {
+    const { gameplay } = game;
+    const playerObj = gameplay.find(({ id }) => id === user.id);
+    playerObj.ready = true;
+    const everyPlayerReady = gameplay.every(({ ready }) => ready);
+    let playersWithCardsLeft = gameplay.filter((player) => {
+      if (player.deck.length < 0) player.event = 'Out of Cards';
+      return player.deck.length > 0;
+    });
+
+    if (everyPlayerReady) {
+      const prevWinner = gameplay.find((player) => player.event === 'Winner');
+      if (prevWinner) {
+        gameplay.forEach((player) => {
+          prevWinner.deck.push(...player.showCards, ...player.hiddenCards);
+          player.showCards = [];
+          player.hiddenCards = [];
+        });
+      }
+      playersWithCardsLeft.forEach((player) => {
+        player.event = null;
+        if (player.id !== 'computer') player.ready = !player.ready;
+        if (player.deck.length > 0) player.showCards.unshift(player.deck.shift());
+      });
+      const cardValues = playersWithCardsLeft.map((player) => +player.showCards[0].slice(1));
+      const areUnique = new Set(cardValues).size === cardValues.length;
+      playersWithCardsLeft = gameplay.filter((player) => {
+        if (player.deck.length < 0) player.event = 'Out of Cards';
+        return player.deck.length > 0;
+      });
+      if (!areUnique && playersWithCardsLeft.length > 1) {
+        cardValues.forEach((val, i, arr) => {
+          if (arr.indexOf(val) !== arr.lastIndexOf(val)) {
+            const player = playersWithCardsLeft[i];
+            player.event = 'War';
+            player.hiddenCards.unshift(player.deck.shift());
+          }
+        });
+      } else {
+        const winnerIndex = cardValues.indexOf(Math.max(...cardValues));
+        playersWithCardsLeft[winnerIndex].event = 'Winner';
+      }
+    }
+    return gameplay;
   },
 };
 
@@ -49,5 +96,11 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+  handleTurn: async (req, res, next) => {
+    const gameplay = turnAction[req.game.typeOfGame](req.game, req.currentUser);
+    const update = await Game.update({ gameplay }, { where: { id: req.game.id } });
+    console.log('updated games: ', update);
+    next();
   },
 };

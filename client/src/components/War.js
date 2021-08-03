@@ -1,5 +1,8 @@
 import React from 'react';
 import { useUserContext } from '../context/UserContext';
+import { useFetchData } from '../hooks';
+import images from '../img';
+
 
 function War({ game }) {
   const { user } = useUserContext();
@@ -9,21 +12,27 @@ function War({ game }) {
     <>
       {game.status !== 'created' &&
         game.gameplay.map((player) => (
-          <figure key={player.id}>
-            {player.event && <h3>{player.event}!</h3>}
+          <figure className="player--cards" key={player.id}>
+            {player.event && <h3 className="player--event">{player.event}!</h3>}
             {player.showCards.map((card, i) => (
               <img
-                // src={`../img/${game.gameplay[player.id]}`}
+                className="card--image"
+                key={i}
+                src={images[card]}
                 alt={`Card belonging to ${player.name}: ${card}`}
               />
             ))}
-            <figcaption>
+            <figcaption className="player--name">
               {`${player.name}: ${player.showCards.join(', ')}`}
-              <span className={player.ready}>{player.status}</span>
+
+              <span className={player.ready ? 'ready' : undefined}>
+                -- {player.ready && 'Ready!'}
+              </span>
+
             </figcaption>
             {player.id === user.id && (
               <>
-                <button onClick={handleReady} disabled={player.ready}>
+                <button onClick={handleReady} disabled={player.ready} className="ready--button">
                   {player.ready ? 'Waiting...' : 'Ready'}
                 </button>
               </>

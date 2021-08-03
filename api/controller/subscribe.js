@@ -3,7 +3,6 @@ const clients = {};
 module.exports = {
   clientSubscribe: async (req, res) => {
     const { id: gameId } = req.game;
-    console.log(req.game);
     res.status(200).set({
       'Content-Type': 'text/event-stream',
       'Connection': 'keep-alive',

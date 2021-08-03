@@ -47,7 +47,7 @@ const turnAction = {
     playerObj.ready = true;
     const everyPlayerReady = gameplay.every(({ ready }) => ready);
     let playersWithCardsLeft = gameplay.filter((player) => {
-      if (player.deck.length < 0) player.event = 'Out of Cards';
+      if (!player.deck.length) player.event = 'Out of Cards';
       return player.deck.length > 0;
     });
 

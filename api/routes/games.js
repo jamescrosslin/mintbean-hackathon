@@ -1,10 +1,11 @@
 const { User, Game } = require('../models');
-const { authenticateUser, asyncHandler, checkOwnership } = require('../middleware');
+const { authenticateUser, asyncHandler } = require('../middleware');
 const express = require('express');
 const router = express.Router();
 
 const { startGame } = require('../controller/play');
 const { clientSubscribe, sendClientUpdates } = require('../controller/subscribe');
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
 
 router.param('gameId', async (req, res, next, id) => {
   // any routes with :gameId will have this function run
@@ -74,7 +75,7 @@ router.use(
     next();
   }),
   sendClientUpdates,
-  (req, res) => res.json({ gameId: req.game.id }),
+  (req, res) => res.json({ message: `${clientUrl}/games/join/${req.game.id}` }),
 );
 const warRoutes = require('./war');
 router.use('/war/:gameId', warRoutes);

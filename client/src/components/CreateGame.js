@@ -42,14 +42,9 @@ function CreateGame({ refreshGames, dismissForm }) {
   }
 
   return (
-    (!isLoading && data && (
-      <>
-        <span>Invite link: {data.message}</span>
-      </>
-    )) || (
-      <div className="modal--wrapper">
-        {/* displays validation errors when they exist */}
-        {error?.errors && <ValidationErrors error={error} />}
+    <div className="modal--wrapper">
+      {error?.errors && <ValidationErrors error={error} />}
+      {(data && <span>Invite link: {data.message}</span>) || (
         <form onSubmit={handleSubmit} className="modal">
           {
             //put popup overlay here
@@ -84,15 +79,15 @@ function CreateGame({ refreshGames, dismissForm }) {
             </select>
           </label>
 
-          <button type="submit" className="modal--submit--btn">
+          <button type="submit" className="modal--submit--btn" disabled={Boolean(data)}>
             Submit
           </button>
           <button type="button" onClick={dismissForm} className="modal--cancel--btn">
             Cancel
           </button>
         </form>
-      </div>
-    )
+      )}
+    </div>
   );
 }
 export default CreateGame;

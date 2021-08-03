@@ -89,7 +89,8 @@ const turnAction = {
     }
     if (playersWithCardsLeft.length === 1) {
       gameplay.status = 'completed';
-      playersWithCardsLeft[0].event = 'Winner';
+      playersWithCardsLeft[0].event = 'Big Winner';
+      gameplay.map((player) => (player.ready = true));
     }
     return gameplay;
   },

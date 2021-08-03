@@ -31,8 +31,14 @@ router.use(authenticateUser); // authenticates users for every following route i
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const games = await req.currentUser.getGames({ include: [{ model: User }] });
-    res.json({ games });
+    try {
+      const games = await req.currentUser.getGames({
+        include: [{ model: User }],
+      });
+      res.json({ games });
+    } catch (err) {
+      return res.json({ games: [] });
+    }
   }),
 );
 
@@ -77,6 +83,6 @@ router.use(
   (req, res) => res.json({ gameId: req.game.id }),
 );
 const warRoutes = require('./war');
-router.use('/war', warRoutes);
+router.use('/war/:gameId', warRoutes);
 
 module.exports = router;

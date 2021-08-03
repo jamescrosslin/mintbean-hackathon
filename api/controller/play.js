@@ -30,7 +30,7 @@ const configureGame = {
         event: null,
         ready: false,
       };
-      if (player.id === 'computer') playerObj.ready === true;
+      if (player.id === 'computer') playerObj.ready = true;
       return playerObj;
     });
     return gameplay;
@@ -62,7 +62,7 @@ const turnAction = {
       }
       playersWithCardsLeft.forEach((player) => {
         player.event = null;
-        if (player.id !== 'computer') player.ready = !player.ready;
+        if (player.id !== 'computer') player.ready = false;
         if (player.deck.length > 0) player.showCards.unshift(player.deck.shift());
       });
       const cardValues = playersWithCardsLeft.map((player) => +player.showCards[0].slice(1));

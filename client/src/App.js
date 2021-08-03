@@ -3,7 +3,6 @@ import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 
 import Header from './components/partials/Header';
 import Games from './components/Games';
-import Home from './components/Home';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import UserSignOut from './components/UserSignOut';
@@ -49,7 +48,7 @@ function App() {
         <main>
           <Switch>
             <Route path="/" exact>
-              <Home />
+              <Redirect to="/games" />
             </Route>
             <PrivateRoute path="/games" exact>
               <Games />

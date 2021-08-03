@@ -25,13 +25,14 @@ function War({ game }) {
             {player.event && <h3>{player.event}!</h3>}
             {player.showCards.map((card, i) => (
               <img
+                key={i}
                 // src={`../img/${game.gameplay[player.id]}`}
                 alt={`Card belonging to ${player.name}: ${card}`}
               />
             ))}
             <figcaption>
               {`${player.name}: ${player.showCards.join(', ')}`}
-              <span className={player.ready && 'ready'}>{player.ready && 'Ready!'}</span>
+              <span className={player.ready ? 'ready' : undefined}>{player.ready && 'Ready!'}</span>
             </figcaption>
             {player.id === user.id && (
               <>

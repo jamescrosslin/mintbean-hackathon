@@ -62,8 +62,9 @@ app.use((req, res) => {
 
 // setup a global error handler
 app.use((err, _req, res, _next) => {
-  console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
-
+  if (enableGlobalErrorLogging) {
+    console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
+  }
   const message = err.message || 'Internal Server Error';
   const errors = err.validationErrors || err.errors || [];
   res.status(err.status || 500).json({

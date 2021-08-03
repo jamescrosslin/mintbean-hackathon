@@ -1,22 +1,10 @@
 import React from 'react';
 import { useUserContext } from '../context/UserContext';
-import { useFetchData } from '../hooks';
 
 function War({ game }) {
   const { user } = useUserContext();
-  const { data, fetchData } = useFetchData({
-    isLoading: true,
-    data: null,
-    error: null,
-  });
 
-  function handleReady() {
-    fetchData({
-      apiRoute: `/api/games/war/${game.id}/play`,
-      method: 'GET',
-      isAuthRequired: true,
-    });
-  }
+  function handleReady() {}
   return (
     <>
       {game.status !== 'created' &&
@@ -31,7 +19,7 @@ function War({ game }) {
             ))}
             <figcaption>
               {`${player.name}: ${player.showCards.join(', ')}`}
-              <span className={player.ready && 'ready'}>{player.ready && 'Ready!'}</span>
+              <span className={player.ready}>{player.status}</span>
             </figcaption>
             {player.id === user.id && (
               <>

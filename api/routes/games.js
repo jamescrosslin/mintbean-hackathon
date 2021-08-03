@@ -77,6 +77,6 @@ router.use(
   (req, res) => res.json({ gameId: req.game.id }),
 );
 const warRoutes = require('./war');
-router.use('/war', warRoutes);
+router.use('/war/:gameId', warRoutes);
 
 module.exports = router;

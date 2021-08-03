@@ -1,5 +1,5 @@
 // add an environmental variable during bootup or change the string to your api url
-const url = process.env.API_URL || 'http://localhost:5000';
+const url = process.env.API_URL || 'https://warplus-api.herokuapp.com/';
 
 // where different error codes will redirect, used throughout app to handle errors
 const errorRoutes = {

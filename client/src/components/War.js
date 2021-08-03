@@ -3,21 +3,11 @@ import { useUserContext } from '../context/UserContext';
 import { useFetchData } from '../hooks';
 import images from '../img';
 
+
 function War({ game }) {
   const { user } = useUserContext();
-  const { data, fetchData } = useFetchData({
-    isLoading: true,
-    data: null,
-    error: null,
-  });
 
-  function handleReady() {
-    fetchData({
-      apiRoute: `/api/games/war/${game.id}/play`,
-      method: 'GET',
-      isAuthRequired: true,
-    });
-  }
+  function handleReady() {}
   return (
     <>
       {game.status !== 'created' &&
@@ -34,10 +24,11 @@ function War({ game }) {
             ))}
             <figcaption className="player--name">
               {`${player.name}: ${player.showCards.join(', ')}`}
+
               <span className={player.ready ? 'ready' : undefined}>
-                {' '}
                 -- {player.ready && 'Ready!'}
               </span>
+
             </figcaption>
             {player.id === user.id && (
               <>

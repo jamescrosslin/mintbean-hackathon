@@ -8,6 +8,7 @@ const { authenticateUser, asyncHandler, checkOwnership } = require('../middlewar
 const { handleTurn } = require('../controller/play');
 const { clientSubscribe, sendClientUpdates } = require('../controller/subscribe');
 
+
 router.get('/play', asyncHandler(handleTurn), sendClientUpdates, (req, res) => res.json('updated'));
 
 module.exports = router;

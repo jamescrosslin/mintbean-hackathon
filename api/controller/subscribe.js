@@ -1,8 +1,7 @@
-const { authenticateUser, asyncHandler, checkOwnership } = require('../middleware');
 const clients = {};
 
 module.exports = {
-  clientSubscribe: asyncHandler(async (req, res) => {
+  clientSubscribe: async (req, res) => {
     const { id: gameId } = req.game;
     res.status(200).set({
       'Content-Type': 'text/event-stream',
@@ -27,8 +26,8 @@ module.exports = {
       console.log(`${clientId} connection closed`);
       clients[gameId] = clients[gameId].filter((client) => client.id !== clientId);
     });
-  }),
-  sendClientUpdates: asyncHandler(async ({ game }, res, next) => {
+  },
+  sendClientUpdates: async ({ game }, res, next) => {
     const { id: gameId } = game;
     const subscribers = clients[gameId] || [];
 
@@ -36,5 +35,5 @@ module.exports = {
       client.res.write(`data: ${JSON.stringify(game)}\n\n`);
     });
     next();
-  }),
+  },
 };

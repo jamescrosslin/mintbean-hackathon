@@ -21,7 +21,7 @@ const configureGame = {
       const remainder = shuffledCards.length % arr.length;
       const start = i * distribution;
       const finish = (i + 1) * distribution + (remainder && i >= arr.length - remainder ? 1 : 0);
-      const playerObj = {
+      return {
         id: player.id,
         deck: shuffledCards.slice(start, finish),
         name: player.firstName,
@@ -30,8 +30,6 @@ const configureGame = {
         event: null,
         ready: false,
       };
-      if (player.id === 'computer') playerObj.ready = true;
-      return playerObj;
     });
     return gameplay;
   },

@@ -68,7 +68,8 @@ const turnAction = {
       const cardValues = playersWithCardsLeft.map((player) => +player.showCards[0].slice(1));
       const areUnique = new Set(cardValues).size === cardValues.length;
       playersWithCardsLeft = gameplay.filter((player) => {
-        if (player.deck.length < 0) player.event = 'Out of Cards';
+        const numberToBeat = areUnique ? 1 : 4;
+        if (player.deck.length < numberToBeat) player.event = 'Out of Cards';
         return player.deck.length > 0;
       });
       if (!areUnique && playersWithCardsLeft.length > 1) {
@@ -76,13 +77,19 @@ const turnAction = {
           if (arr.indexOf(val) !== arr.lastIndexOf(val)) {
             const player = playersWithCardsLeft[i];
             player.event = 'War';
-            player.hiddenCards.unshift(player.deck.shift());
+            for (let i = 0; i < 4; i++) {
+              player.hiddenCards.unshift(player.deck.shift());
+            }
           }
         });
       } else {
         const winnerIndex = cardValues.indexOf(Math.max(...cardValues));
         playersWithCardsLeft[winnerIndex].event = 'Winner';
       }
+    }
+    if (playersWithCardsLeft.length === 1) {
+      gameplay.status = 'completed';
+      playersWithCardsLeft[0].event = 'Winner';
     }
     return gameplay;
   },

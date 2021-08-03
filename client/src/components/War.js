@@ -22,21 +22,18 @@ function War({ game }) {
     <>
       {game.status !== "created" &&
         game.gameplay.map((player) => (
-          <figure key={player.id} className="player--cards">
-            {player.event && <h3 className="player--event">{player.event}!</h3>}
-
-            <img
-              className="card--image"
-              // src={`../img/${game.gameplay[player.id]}`}
-              src={images["D2"]}
-              alt={`Card belonging to ${player.name}:  A CARD`}
-            />
-
-            <figcaption className="player--name">
-              {`${player.name}: ${player.showCards.join(", ")}`}
-              <span className={player.ready && "ready"}>
-                {player.ready && "Ready!"}
-              </span>
+          <figure key={player.id}>
+            {player.event && <h3>{player.event}!</h3>}
+            {player.showCards.map((card, i) => (
+              <img
+                key={i}
+                src={img[card]}
+                alt={`Card belonging to ${player.name}: ${card}`}
+              />
+            ))}
+            <figcaption>
+              {`${player.name}: ${player.showCards.join(', ')}`}
+              <span className={player.ready ? 'ready' : undefined}>{player.ready && 'Ready!'}</span>
             </figcaption>
             {player.id === user.id && (
               <>

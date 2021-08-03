@@ -23,6 +23,12 @@ function War({ game }) {
       {game.gameplay.some((player) => player.event === 'War') && (
         <h3 className="war--instructions">Each player puts 4 cards in the pot</h3>
       )}
+      {game.status === 'created' && (
+        <>
+          <h3 className="war--instructions">All players must join a game before it starts!</h3>
+          <h4>Invite players: {`${window.location}games/join/${game.id}`}</h4>
+        </>
+      )}
       {game.status !== 'created' &&
         game.status !== 'completed' &&
         game.gameplay.map((player) => (

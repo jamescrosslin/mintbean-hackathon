@@ -29,6 +29,9 @@ function UserSignIn() {
     !isLoading && (
       <div className="form--centered">
         <h2>Sign In</h2>
+        <span>
+          This application is in beta and vitally insecure. Do not use real emails or passwords.
+        </span>
         <form onSubmit={handleSubmit}>
           <label htmlFor="emailAddress">Email Address</label>
           <input

@@ -13,7 +13,7 @@ function War({ game }) {
 
   function handleReady() {
     fetchData({
-      apiRoute: `/api/games/war/${game.id}/play`,
+      apiRoute: `/api/games/war/${game.id}/turn`,
       isAuthRequired: true,
       method: 'GET',
     });

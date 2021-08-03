@@ -10,7 +10,7 @@ function Play() {
 
   useEffect(() => {
     setIsLoading(true);
-    let events = new EventSource(`${url}/api/games/play/${id}`);
+    let events = new EventSource(`${url}/api/games/subscribe/${id}`);
 
     events.onmessage = (event) => {
       const parsedData = JSON.parse(event.data);

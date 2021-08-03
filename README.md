@@ -1,13 +1,13 @@
-# North Valley Business Academy Administrator Dashboard
+# WarPlus
 
-NVBA Admin Dashboard is a course management application for a small to mid-size organization.
+WarPlus is a card game app for 1 to 4 players.
 
 ## Features
 
 - Client and server side programs
 - Integrated user account infrastructure
 - Custom user authorization
-- Create, display, modify, and delete course data from dashboard
+- Create and play games from dashboard
 - Modular and extensible through configuration
 
 ## Tech Stack
@@ -21,29 +21,28 @@ NVBA Admin Dashboard is a course management application for a small to mid-size 
 Clone the project
 
 ```bash
-  git clone https://github.com/jamescrosslin/nvba-admin-dashboard.git
+  git clone https://github.com/jamescrosslin/mintbean-hackathon.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd nvba-admin-dashboard
+  cd warplus
 ```
 
-Install dependencies
+Install dependencies and start project
+
+```bash
+  cd api
+  npm install
+  npm start
+```
+
+In a separate terminal:
 
 ```bash
   cd client
   npm install
-  cd ../api
-  npm install
-```
-
-Start the server
-
-```bash
-  npm start
-  cd ../client
   npm start
 ```
 
@@ -52,3 +51,4 @@ Start the server
 To run this project, you will need to add the following environment variables to your runtime environment
 
 `API_URL` - a string representing the hosting location of the api application (defaults to localhost:5000)
+`CLIENT_URL` - a string representing the hosting location of the client application (defaults to localhost:3000)

@@ -67,6 +67,9 @@ function UserSignUp() {
     !isLoading && (
       <div className="form--centered">
         <h2>Sign Up</h2>
+        <span>
+          This application is in beta and vitally insecure. Do not use real emails or passwords.
+        </span>
         {/* displays validation errors when they exist */}
         {error.errors && <ValidationErrors error={error} />}
         <form onSubmit={handleSubmit}>

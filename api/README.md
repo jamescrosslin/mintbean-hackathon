@@ -1,11 +1,11 @@
-# North Valley Business Academy API
+# WarPlus API
 
-North Valley Business Academy API (NVBAApi) is web endpoint that accepts, stores, and provides NVBA user
-and course data. Authrization is required for certain functionality, such as creating and modifying courses. More information is available in the [Using the API](#using-the-api) section.
+WarPlus API (WPA) is web endpoint that accepts, stores, and provides WPA user
+and game data. Authrization is required for certain functionality, such as creating and modifying games. More information is available in the [Using the API](#using-the-api) section.
 
 ## Tech
 
-NVBAApi utilizes a number of open source projects:
+WPA utilizes a number of open source projects:
 
 - [node.js] - evented I/O for the backend
 - [Express] - fast node.js network app framework by [@tjholowaychuk]
@@ -14,25 +14,18 @@ NVBAApi utilizes a number of open source projects:
 - [SQLite3] - small, fast local database engine
 - [basic-auth] - simplified basic authorization library
 - [bcrypt] - easy hashing library
-- [cross-env] - compatibility library for env variables in different OS
 - [nodemon] - process supervisor for node.js
 
 ## Installation
 
-NVBAApi requires [Node.js](https://nodejs.org/) v14+ to run.
+WPAApi requires [Node.js](https://nodejs.org/) v14+ to run.
 
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-cd nvba-courses-api
+cd api
 npm i
 npm start
-```
-
-To seed mock user and course data...
-
-```sh
-npm run seed
 ```
 
 For production environments...
@@ -44,7 +37,7 @@ cross-env NODE_ENV=production npm start
 
 ## Using the API
 
-NVBAApi has two main routes: `/api/courses` and `/api/users`.
+WPAApi has two main routes: `/api/games` and `/api/users`.
 
 ### Authentication
 
@@ -65,25 +58,24 @@ To create a new user, send a post request to the api at `/api/users` with the re
 
 Now you will be able to make a get request to `/api/users` to retrieve your account information. Requires [Basic Authentication](#authentication). Response will be sent including user id, firstName, lastName, and emailAddress.
 
-### Courses Route
+### Games Route
 
 The model for user information is as follows:
 
-- title, required string
-- description, required text block
-- estimatedTime, an optional string
-- materialsNeeded, an optional string
-- userId, required id of associated user in the system
+- typeOfGame, required ENUM of games available
+- status, required ENUM of `created`, `completed`, or `ongoing`
+- maxPlayers, required integer of how many players
+- gameplay, required JSON state of the game
 
-To view a full list of courses, make a get request to `/api/courses`. The return object will have an array of course objects that follow the course model. When requesting any course information, the userId value will be replaced with the public info of the related user.
+To view a full list of games of your games, make a get request to `/api/games`. The return object will have an array of game objects that follow the game model. When requesting any game information, the Users value will be replaced with the public info of all players in the game. Requires [Basic Authentication](#authentication).
 
-To create a new course, make a post request to `/api/courses` and include information according to the course model. Requires [Basic Authentication](#authentication).
+To create a new game, make a post request to `/api/games/create` and include information according to the game model. User is redirected after creation to the `/api/games/join/id` route, where `id` is the id property of the newly created game. Requires [Basic Authentication](#authentication).
 
-To view a specific course, make a get request to `/api/courses/id` where `id` is the course's id key. Response will be an object with course model properties.
+To view a specific game, make an EventSource request to `/api/games/subscribe/id` where `id` is the game's id key. Response will be a Server Sent Event driven stream of data containing the state of the game.
 
-To update a course, the course's associated user can send a put request to `/api/courses/id` where id is the course's id key. Requires [Basic Authentication](#authentication).
+To join a game, the user can send a get request to `/api/games/join/id` where id is the game's id key. Requires [Basic Authentication](#authentication).
 
-To delete a course, the course's associated user can send a delete request to `/api/courses/id` where id is the course's id key. Requires [Basic Authentication](#authentication).
+To advance a game by taking your turn, send a get request to `/api/games/war/id/turn` where id is the game's id key. Requires [Basic Authentication](#authentication).
 
 ## License
 

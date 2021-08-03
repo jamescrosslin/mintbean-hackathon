@@ -6,6 +6,6 @@ const { asyncHandler } = require('../middleware');
 const { handleTurn } = require('../controller/play');
 const { sendClientUpdates } = require('../controller/subscribe');
 
-router.get('/play', asyncHandler(handleTurn), sendClientUpdates, (req, res) => res.json('updated'));
+router.get('/turn', asyncHandler(handleTurn), sendClientUpdates, (req, res) => res.json('updated'));
 
 module.exports = router;

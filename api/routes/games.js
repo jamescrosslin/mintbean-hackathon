@@ -14,7 +14,14 @@ router.param('gameId', async (req, res, next, id) => {
       where: {
         id,
       },
-      include: [{ model: User }],
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ['password', 'createdAt', 'updatedAt'],
+          },
+        },
+      ],
     });
     req.game = game;
     next();
@@ -25,7 +32,7 @@ router.param('gameId', async (req, res, next, id) => {
   }
 });
 
-router.get('/play/:gameId', clientSubscribe);
+router.get('/subscribe/:gameId', clientSubscribe);
 
 router.use(authenticateUser); // authenticates users for every following route in this module
 

@@ -43,13 +43,7 @@ const turnAction = {
     const playerObj = gameplay.find(({ id }) => id === user.id);
     playerObj.ready = true;
     const everyPlayerReady = gameplay.every(({ ready }) => ready);
-    let playersWithCardsLeft = gameplay.filter((player) => {
-      if (!player.deck.length) {
-        player.event = 'Out of Cards';
-        player.ready = true;
-      }
-      return player.deck.length > 0;
-    });
+    let playersWithCardsLeft = [];
 
     if (everyPlayerReady) {
       const prevWinner = gameplay.find((player) => player.event === 'Winner');
@@ -60,6 +54,14 @@ const turnAction = {
           player.hiddenCards = [];
         });
       }
+
+      playersWithCardsLeft = gameplay.filter((player) => {
+        if (!player.deck.length) {
+          player.event = 'Out of Cards';
+          player.ready = true;
+        }
+        return player.deck.length > 0;
+      });
 
       playersWithCardsLeft.forEach((player) => {
         player.event = null;
@@ -100,7 +102,17 @@ const turnAction = {
 module.exports = {
   startGame: async (gameId) => {
     try {
-      const game = await Game.findOne({ where: { id: gameId }, include: [{ model: User }] });
+      const game = await Game.findOne({
+        where: { id: gameId },
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ['password', 'createdAt', 'updatedAt'],
+            },
+          },
+        ],
+      });
       const gameplay = configureGame[game.typeOfGame](game.gameplay, game.Users);
       await game.update({ gameplay, status: 'ongoing' });
     } catch (err) {

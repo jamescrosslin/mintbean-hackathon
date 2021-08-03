@@ -30,7 +30,7 @@ const configureGame = {
         event: null,
         ready: false,
       };
-      if (player.id === 'computer') player.ready === true;
+      if (player.id === 'computer') playerObj.ready === true;
       return playerObj;
     });
     return gameplay;

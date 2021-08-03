@@ -7,12 +7,8 @@ const { authenticateUser, asyncHandler, checkOwnership } = require('../middlewar
 
 const { clientSubscribe, sendClientUpdates } = require('../controller/subscribe');
 
-router.get(
-  '/play',
-  asyncHandler(async (req, res) => {
-    console.log('inside war: ', req.game.id);
-    res.json({ message: 'turn played' });
-  }),
-);
+router.post('/ready', (req, res) => {
+  console.log(req.game.id);
+});
 
 module.exports = router;

@@ -1,14 +1,14 @@
 {
   "development": {
     "dialect": "sqlite",
-    "storage": "fsjstd-restapi.db"
+    "storage": "warplus.db"
   },
   "test": {
     "dialect": "sqlite",
-    "storage": "fsjstd-restapi.db"
+    "storage": "warplus.db"
   },
   "production": {
     "dialect": "sqlite",
-    "storage": "fsjstd-restapi.db"
+    "storage": "warplus.db"
   }
 }

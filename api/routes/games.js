@@ -69,7 +69,6 @@ router.use(
     }
 
     const didAddUser = await req.game.addUser(currentUser);
-    console.log('added user: ');
     if (didAddUser && maxPlayers === Users.length + 1) await startGame(id);
 
     next();

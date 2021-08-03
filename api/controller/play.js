@@ -101,7 +101,6 @@ module.exports = {
   startGame: async (gameId) => {
     try {
       const game = await Game.findOne({ where: { id: gameId }, include: [{ model: User }] });
-      console.log('game.gameplay: ', game.gameplay);
       const gameplay = configureGame[game.typeOfGame](game.gameplay, game.Users);
       await game.update({ gameplay, status: 'ongoing' });
     } catch (err) {
@@ -110,8 +109,7 @@ module.exports = {
   },
   handleTurn: async (req, res, next) => {
     const gameplay = turnAction[req.game.typeOfGame](req.game, req.currentUser);
-    const update = await Game.update({ gameplay }, { where: { id: req.game.id } });
-    console.log('updated games: ', update);
+    await Game.update({ gameplay }, { where: { id: req.game.id } });
     next();
   },
 };

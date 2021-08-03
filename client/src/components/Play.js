@@ -14,12 +14,10 @@ function Play() {
 
     events.onmessage = (event) => {
       const parsedData = JSON.parse(event.data);
-      console.log(parsedData);
       setGame(parsedData);
     };
     events.onerror = (event) => {
       events.close();
-      console.log('EventSource error: ', event, event.error);
     };
     return () => events.close();
   }, [id]);

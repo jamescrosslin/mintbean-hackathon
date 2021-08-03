@@ -27,12 +27,10 @@ export function useFetchData(initialValues) {
         const { data } = await axios(requestOptions);
 
         const updata = transformFunction ? transformFunction(data) : data;
-        console.log(updata);
 
         setState((prevState) => ({ ...prevState, data: updata }));
         setState((prevState) => ({ ...prevState, isLoading: false }));
       } catch (err) {
-        console.dir(err);
         setState((prevState) => ({ ...prevState, error: err }));
       }
     },

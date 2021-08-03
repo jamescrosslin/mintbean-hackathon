@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   const props = {
     typeOfGame: {
       type: DataTypes.ENUM,
-      values: ['War', 'WarPlus'],
+      values: ['War'],
     },
     status: {
       type: DataTypes.ENUM,

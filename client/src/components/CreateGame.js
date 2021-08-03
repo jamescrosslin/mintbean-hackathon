@@ -2,16 +2,14 @@ import { useFetchData } from '../hooks';
 import { useState } from 'react';
 
 import ValidationErrors from './partials/ValidationErrors';
-import { useHistory } from 'react-router-dom';
 
 function CreateGame({ refreshGames, dismissForm }) {
-  const { isLoading, data, error, fetchData } = useFetchData({
+  const { data, error, fetchData } = useFetchData({
     isLoading: true,
     data: null,
     error: null,
   });
   const [formValues, setFormValues] = useState({});
-  const history = useHistory();
 
   function handleFormChange(e) {
     setFormValues((prevState) => {
@@ -57,7 +55,6 @@ function CreateGame({ refreshGames, dismissForm }) {
               >
                 <option value="">Select a Game</option>
                 <option value="War">War</option>
-                <option value="WarPlus">WarPlus</option>
               </select>
             </label>
 

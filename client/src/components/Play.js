@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import { url, errorRoutes } from '../config';
+import { useParams } from 'react-router-dom';
+import { url } from '../config';
 import War from './War';
-
-const gameOptions = {
-  'War': War,
-};
 
 function Play() {
   const [game, setGame] = useState(null);
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
@@ -34,10 +29,10 @@ function Play() {
   }, [game]);
 
   return (
-    (error && <Redirect to={errorRoutes[error.response.status] || '/error'} />) ||
-    (!isLoading && game && (
+    !isLoading &&
+    game && (
       <div className="play-area play--war">{game.typeOfGame === 'War' && <War game={game} />}</div>
-    ))
+    )
   );
 }
 

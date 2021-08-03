@@ -35,9 +35,6 @@ const configureGame = {
     });
     return gameplay;
   },
-  'WarPlus': function (deck, players) {
-    return this.War(deck, players);
-  },
 };
 
 const turnAction = {

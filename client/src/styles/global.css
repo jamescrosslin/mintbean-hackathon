@@ -6,7 +6,7 @@ html {
   font-size: 1.25em;
 }
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 h2 {
@@ -83,13 +83,16 @@ header nav a:hover {
   font-size: 1.25rem;
 }
 .course--add--module {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: bolder;
   background: rgb(175, 241, 217);
   color: rgb(29, 95, 71);
   font-weight: 300;
   font-size: 1.25rem;
   box-shadow: 0 0 5px 2px rgb(102, 192, 178) inset;
+}
+.course--add--module:hover {
+  cursor: pointer;
 }
 .course--add--title .add {
   width: 20px;
@@ -167,7 +170,7 @@ textarea {
   border: 1px solid #8c789b;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 0.8rem;
 }
 textarea {
@@ -292,7 +295,7 @@ textarea:focus {
 .modal--cancel--btn,
 .modal--submit--btn,
 .ready--button {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   border-radius: 8px;
@@ -320,12 +323,14 @@ textarea:focus {
   background-color: rgb(81, 201, 145);
   color: ghostwhite;
   box-shadow: 0 0 0 2px rgb(133, 235, 197) inset;
+  cursor: pointer;
 }
 
 .modal--cancel--btn:hover {
   background-color: rgb(136, 164, 243);
   color: ghostwhite;
   box-shadow: 0 0 0 2px rgb(111, 145, 238) inset;
+  cursor: pointer;
 }
 
 .modal--wrapper {
@@ -340,7 +345,7 @@ textarea:focus {
 /* War in-game styles */
 
 .play--war {
-  height: 100vw;
+  height: 100vh;
   margin-top: -41px;
   background-color: rgba(250, 235, 215, 0.5);
   /* outline: 1px solid gold; */
@@ -369,7 +374,7 @@ h3.player--event {
   font-weight: 800;
   font-size: 2.1rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #053b6a 10%, #17aaee 50%, #57d75b 60%);
+  background: linear-gradient(to left, #053b6a 10%, #17aaee 50%, #57d75b 60%);
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
@@ -382,10 +387,10 @@ h3.player--event {
 }
 
 .war--instructions {
+  height: fit-content;
   font-weight: 500;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #053b6a 10%, #17aaee 50%, #0beba4 60%);
+  background: linear-gradient(to right, #053b6a 10%, #17aaee 50%, #17be8a 60%);
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
@@ -393,8 +398,9 @@ h3.player--event {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textclip 2.3s linear infinite;
+  animation: textclip 3s linear infinite;
   display: block;
+  width: 100%;
 }
 
 @keyframes textclip {
@@ -413,6 +419,7 @@ h3.player--event {
 }
 
 .player--cards {
+  height: fit-content;
   margin-top: 1rem;
   padding: 0.5rem;
   color: rgb(9, 97, 75);
@@ -422,7 +429,7 @@ h3.player--event {
 @media screen and (max-width: 800px) {
   .play--war {
     height: auto;
-    background-color: rgb(206, 205, 205);
+    background-color: rgb(230, 228, 228);
     text-align: center;
     display: flex;
     flex-wrap: wrap;

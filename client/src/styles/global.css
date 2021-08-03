@@ -212,8 +212,6 @@ textarea {
   cursor: pointer;
 }
 input:focus,
-button:focus,
-.button:focus,
 textarea:focus {
   border: none;
   border-radius: 0;
@@ -342,7 +340,7 @@ textarea:focus {
 /* War in-game styles */
 
 .play--war {
-  height: 100vh;
+  height: 100vw;
   margin-top: -41px;
   background-color: rgba(250, 235, 215, 0.5);
   /* outline: 1px solid gold; */
@@ -364,15 +362,36 @@ textarea:focus {
   margin-top: 0.6rem;
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
+  outline: 0;
 }
 
-.player--event {
-  outline: 1px solid rgb(44, 87, 9);
+h3.player--event {
+  margin-top: -7vh;
+  font-weight: 800;
+  font-size: 2.1rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #095fab 10%, #25abe8 50%, #57d75b 60%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 1.2s linear infinite;
+  display: block;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
 }
 
 .card--image {
-  width: 20vw;
-  height: 28vw;
+  width: 17vw;
+  height: 23vw;
   border-radius: 23px;
   box-shadow: 2px 1px 5px rgb(105, 84, 53);
   flex-shrink: 1;
@@ -380,6 +399,7 @@ textarea:focus {
 }
 
 .player--cards {
+  margin-top: 1rem;
   padding: 0.5rem;
   color: rgb(9, 97, 75);
   text-shadow: 1px 1px 1px rgb(62, 194, 159);
@@ -389,7 +409,6 @@ textarea:focus {
   .play--war {
     text-align: center;
     display: flex;
-    flex-direction: row-reverse;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -410,6 +429,7 @@ textarea:focus {
     margin-top: 0.4rem;
     font-size: 0.8rem;
     padding: 0.8rem 1rem;
+    outline: 0;
   }
   .player--cards {
     padding: 0.2rem;

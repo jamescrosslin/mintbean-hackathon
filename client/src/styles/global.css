@@ -347,7 +347,6 @@ textarea:focus {
   padding: 2rem;
   text-align: center;
   display: flex;
-  flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: space-around;
@@ -370,16 +369,31 @@ h3.player--event {
   font-weight: 800;
   font-size: 2.1rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #095fab 10%, #25abe8 50%, #57d75b 60%);
+  background: linear-gradient(to right, #053b6a 10%, #17aaee 50%, #57d75b 60%);
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
-  color: #fff;
+  color: rgb(19, 155, 143);
   background-clip: text;
-  text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 1.2s linear infinite;
+  display: block;
+}
+
+.war--instructions {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #053b6a 10%, #17aaee 50%, #0beba4 60%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: rgb(19, 155, 143);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2.3s linear infinite;
   display: block;
 }
 
@@ -407,6 +421,8 @@ h3.player--event {
 
 @media screen and (max-width: 800px) {
   .play--war {
+    height: auto;
+    background-color: rgb(206, 205, 205);
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -435,5 +451,8 @@ h3.player--event {
     padding: 0.2rem;
     color: rgb(18, 80, 63);
     text-shadow: 1px 1px 1px white;
+  }
+  h3.player--event {
+    margin: 0.4rem;
   }
 }

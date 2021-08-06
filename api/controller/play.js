@@ -88,13 +88,13 @@ const turnAction = {
       } else if (playersWithCardsLeft.length > 1) {
         const winnerIndex = cardValues.indexOf(Math.max(...cardValues));
         playersWithCardsLeft[winnerIndex].event = 'Winner';
+      } else if (playersWithCardsLeft.length === 1) {
+        gameplay.status = 'completed';
+        playersWithCardsLeft[0].event = 'Big Winner';
+        gameplay.map((player) => (player.ready = true));
       }
     }
-    if (playersWithCardsLeft.length === 1) {
-      gameplay.status = 'completed';
-      playersWithCardsLeft[0].event = 'Big Winner';
-      gameplay.map((player) => (player.ready = true));
-    }
+
     return gameplay;
   },
 };
